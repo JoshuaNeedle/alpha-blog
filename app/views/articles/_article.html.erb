@@ -9,8 +9,14 @@
           <%= truncate(article.description, length: 100) %>
           <div class="article-meta-details">
             <small> Created by: <%= article.user.username if article.user %>,
-                    <%= time_ago_in_words(article.created_at) %> ago,
-                    last updated: <%= time_ago_in_words(article.updated_at) %> ago</small>
+                    <%= time_ago_in_words(article.created_at) %> ago
+            </small>
+            <% if article.updated_by_user %>
+              <br>
+              <small> Last updated by: <%= article.updated_by_user.username if article.updated_by_user %>,
+                      <%= time_ago_in_words(article.updated_at) %> ago
+              </small>
+            <% end %>
           </div>
         </div>
         <% if logged_in? && (current_user == article.user || current_user.admin?) %>

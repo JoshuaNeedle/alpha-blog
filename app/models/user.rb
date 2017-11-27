@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :articles, dependent: :destroy
+  has_many :articles, :class_name => "Article", :foreign_key => "user_id", dependent: :destroy
   before_save { self.email = email.downcase }
   validates :username, presence: true, 
             uniqueness: { case_sensitive: false }, 
